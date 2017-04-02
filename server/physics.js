@@ -31,72 +31,75 @@ const checkAttackCollision = (character, attackObj) => {
   return checkCollisions(character, attack, attack.width, attack.height);
 };
 
+const addGravity = (c) => {
+  const character = c;
+  character.vy += 1;
+};
+
+const updatePosition = (c) => {
+  const character = c;
+  character.destY = character.prevY + character.vy;
+  character.destX = character.prevX + character.vx;
+};
+
+const clampPosToBounds = (c) => {
+  const character = c;
+  // if user is moving up, decrease y
+  if (character.destY < 0) {
+    character.destY = 0;
+  }
+  // if user is moving down, increase y
+  if (character.destY > 400) {
+    character.destY = 400;
+  }
+  // if user is moving left, decrease x
+  if (character.destX < 0) {
+    character.destX = 0;
+  }
+  // if user is moving right, increase x
+  if (character.destX > 400) {
+    character.destX = 400;
+  }
+};
+
 const movePlayer = (hash) => {
-  let square = charList[hash];
-  
+  const square = charList[hash];
+
   if (!square) return;
 
-  //move the last x/y to our previous x/y variables
+  // move the last x/y to our previous x/y variables
   square.prevX = square.x;
   square.prevY = square.y;
 
-  //if user is jumping, add jump force
-  if(square.moveUp && square.vy >= 0) {
+  // if user is jumping, add jump force
+  if (square.moveUp && square.vy >= 0) {
     square.vy = -10;
   }
-  //if user is moving down, ignore
-  if(square.moveDown) {
-    //square.vy = 2; let gravity handle it
+  // if user is moving down, ignore
+  if (square.moveDown) {
+    // square.vy = 2; let gravity handle it
   }
-  //if user is moving left, decrease x velocity
-  if(square.moveLeft) {
+  // if user is moving left, decrease x velocity
+  if (square.moveLeft) {
     square.vx = -5;
   }
-  //if user is moving right, increase x velocity
-  if(square.moveRight) {
+  // if user is moving right, increase x velocity
+  if (square.moveRight) {
     square.vx = 5;
   }
-  
+
   if (!square.moveRight && !square.moveLeft) {
     square.vx = 0;
   }
-  
+
   addGravity(square);
-  
+
   // add velocity with dt to get desired position
-  updatePosition(square)
-  
+  updatePosition(square);
+
   // keep the character in bounds
   clampPosToBounds(square);
-}
-
-const addGravity = (character) => {
-  character.vy += 1;
-}
-
-const updatePosition = (character) => {
-  character.destY = character.prevY + character.vy;
-  character.destX = character.prevX + character.vx;
-}
-
-const clampPosToBounds = (character) => {
-  //if user is moving up, decrease y
-  if(character.destY < 0) {
-    character.destY = 0;
-  }
-  //if user is moving down, increase y
-  if(character.destY > 400) {
-    character.destY = 400;
-  }
-  //if user is moving left, decrease x
-  if(character.destX < 0) {
-    character.destX = 0;
-  }
-  //if user is moving right, increase x
-  if(character.destX > 400) {
-    character.destX = 400;
-  }
-}
+};
 
 // handle each attack and calculate collisions
 const checkAttacks = () => {
