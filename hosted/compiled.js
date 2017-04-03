@@ -202,7 +202,7 @@ var update = function update(data) {
   //if the update is for our own character (we dont need it)
   //Although, it could be used for player validation
   if (data.hash === hash) {}
-  //return; now we are listening for our own update
+  //do not return: now we are listening for our own update
 
 
   //if we received an old message, just drop it
@@ -308,6 +308,8 @@ var updatePosition = function updatePosition() {
 
   //reset this character's alpha so they are always smoothly animating
   square.alpha = 0.05;
+
+  square.lastUpdate = new Date().getTime();
 
   //send the updated movement request to the server to validate the movement.
   socket.emit('movementUpdate', square);

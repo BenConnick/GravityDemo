@@ -55,6 +55,11 @@ const setupSockets = (ioServer) => {
 
     // when this user sends the server a movement update
     socket.on('movementUpdate', (data) => {
+      // check time stamp on incoming data
+      if (characters[socket.hash].lastUpdate >= data.lastUpdate) {
+        return;
+      }
+          
       // update the user's info
       // NOTICE: THIS IS NOT VALIDED AND IS UNSAFE
       characters[socket.hash] = data;
