@@ -110,9 +110,9 @@ const checkAttacks = () => {
     const characters = charList;
 
     // for each attack
-    for (let i = 0; i < attacks.length; i++) {
+    for (let i = 0; i < attacks.length; i += 1) {
       // for each character
-      for (let k = 0; k < keys.length; k++) {
+      for (let k = 0; k < keys.length; k += 1) {
         const char1 = characters[keys[k]];
 
         // call to see if the attack and character hit
@@ -133,7 +133,7 @@ const checkAttacks = () => {
       // remove this attack and move onto the next one
       attacks.splice(i);
       // decrease i since our splice changes the array length
-      i--;
+      i -= 1;
     }
   }
 };

@@ -32,7 +32,7 @@ const handleAttack = (userHash) => {
 
 // function to setup our socket server
 const setupSockets = (ioServer) => {
-  console.log("Current time: " + new Date().getTime());
+  console.log(`Current time: ${new Date().getTime()}`);
 
   // set our io server instance
   io = ioServer;
@@ -59,7 +59,7 @@ const setupSockets = (ioServer) => {
     socket.on('movementUpdate', (data) => {
       // check time stamp on incoming data
       if (characters[socket.hash].lastUpdate >= data.lastUpdate) {
-        return; 
+        return;
       }
 
       // update the user's info
@@ -93,7 +93,7 @@ const setupSockets = (ioServer) => {
         case directions.DOWN: {
           attack.width = 66;
           attack.height = 183;
-          attack.y = attack.y + 121;
+          attack.y += 121;
           break;
         }
         // if left, set the height/width of attack to face left
@@ -101,7 +101,7 @@ const setupSockets = (ioServer) => {
         case directions.LEFT: {
           attack.width = 183;
           attack.height = 66;
-          attack.x = attack.x - 183;
+          attack.x -= 183;
           break;
         }
         // if right, set the height/width of attack to face right
@@ -109,7 +109,7 @@ const setupSockets = (ioServer) => {
         case directions.RIGHT: {
           attack.width = 183;
           attack.height = 66;
-          attack.x = attack.x + 61;
+          attack.x += 61;
           break;
         }
         // if up, set the height/width of attack to face up
@@ -117,7 +117,7 @@ const setupSockets = (ioServer) => {
         case directions.UP: {
           attack.width = 66;
           attack.height = 183;
-          attack.y = attack.y - 183;
+          attack.y -= 183;
           break;
         }
         // any other direction we will not handle
