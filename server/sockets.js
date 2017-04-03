@@ -59,7 +59,7 @@ const setupSockets = (ioServer) => {
       if (characters[socket.hash].lastUpdate >= data.lastUpdate) {
         return;
       }
-          
+
       // update the user's info
       // NOTICE: THIS IS NOT VALIDED AND IS UNSAFE
       characters[socket.hash] = data;
