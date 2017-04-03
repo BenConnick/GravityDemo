@@ -117,7 +117,7 @@ const updatePosition = () => {
   //reset this character's alpha so they are always smoothly animating
   square.alpha = 0.05;
   
-  square.lastUpdate = new Date().getTime();
+  square.lastUpdate = Date.now();
 
   //send the updated movement request to the server to validate the movement.
   socket.emit('movementUpdate', square);

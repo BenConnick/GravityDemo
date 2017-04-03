@@ -32,7 +32,7 @@ const handleAttack = (userHash) => {
 
 // function to setup our socket server
 const setupSockets = (ioServer) => {
-  console.log(`Current time: ${new Date().getTime()}`);
+  console.log(`Current time: ${Date.now()}`);
 
   // set our io server instance
   io = ioServer;
