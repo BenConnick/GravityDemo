@@ -32,6 +32,8 @@ const handleAttack = (userHash) => {
 
 // function to setup our socket server
 const setupSockets = (ioServer) => {
+  console.log("Current time: " + new Date().getTime());
+
   // set our io server instance
   io = ioServer;
 
@@ -57,7 +59,7 @@ const setupSockets = (ioServer) => {
     socket.on('movementUpdate', (data) => {
       // check time stamp on incoming data
       if (characters[socket.hash].lastUpdate >= data.lastUpdate) {
-        return;
+        return; 
       }
 
       // update the user's info
